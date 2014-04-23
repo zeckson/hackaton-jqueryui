@@ -1,5 +1,5 @@
-define(["jquery", "jqueryui", "popup-list/popup-list"],
-    function ($) {
+define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-list"],
+    function ($, Watcher) {
         var DEFAULT_OPTIONS = {};
         $.widget("ring.combobox", {
             // default options
@@ -8,6 +8,7 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
             // the constructor
             _create: function () {
                 var me = this;
+                this.watcher = new Watcher(this.element);
                 this.popupList = $("<span>").
                     hide();
                 this.popupList.popuplist({
@@ -30,8 +31,8 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
                     'keyup': function (e) {
                         it._keyup(e);
                     },
-                    'input': function () {
-                        it.narrow(this.value);
+                    'valuechange': function (e,val) {
+                        it.narrow(val);
                     }
                 });
             },
@@ -59,6 +60,8 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
 
             _destroy: function () {
                 this.popupList.popuplist("destroy");
+                this.watcher.destroy();
+                this.element.off('keyup valuechange')
             }
 
         });
