@@ -6,10 +6,10 @@ require.config({
     }
 });
 
-require(['jquery', 'popup/popup'], function ($, popup) {
+require(['jquery', 'popup-list/popup-list'], function ($, popup) {
     'use strict';
 
     $(function(){
-        $("#content").popup({anchor: '#anchor'});
+        $("#content").popuplist({anchor: '#anchor'});
     });
 });
