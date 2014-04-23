@@ -1,5 +1,5 @@
-define(["popup-list/popup-list__item"],
-    function (Item) {
+define(["popup-list/popup-list__item", "jquery"],
+    function (Item, $) {
         var POPUP_LIST_CLASS = "popup-list";
         ItemList = function () {
             this.size = 0;
@@ -32,6 +32,18 @@ define(["popup-list/popup-list__item"],
 
         ItemList.prototype.getElement = function () {
             return this.element;
+        };
+
+        ItemList.prototype.narrow = function (value) {
+            jQuery.each(this.data, function (key, val) {
+                if (value) {
+                    if (key.indexOf(value) !== -1) {
+                        val.getElement().hide();
+                    }
+                }else {
+                    val.getElement().show();
+                }
+            })
         };
 
         return ItemList;

@@ -6,10 +6,12 @@ require.config({
     }
 });
 
-require(['jquery', 'popup-list/popup-list'], function ($, popup) {
+require(['jquery', 'popup/popup' ,'popup-list/popup-list', 'combobox/combobox'], function ($) {
     'use strict';
 
     $(function(){
-        $("#content").popuplist({anchor: '#anchor'});
+        $("#popup-content").popup({anchor: '#popup'});
+        $("#popuplist-content").popuplist({anchor: '#popuplist'});
+        $("#combobox").combobox();
     });
 });

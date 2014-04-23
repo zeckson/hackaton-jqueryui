@@ -32,6 +32,10 @@ define(["jquery", "popup-list/popup-list__itemList", "popup/popup"],
                 this.itemList.remove(item);
             },
 
+            getList: function () {
+                return this.itemList;
+            },
+
             _destroy: function () {
                 this.itemList.getElement().remove();
                 this.itemList = null;

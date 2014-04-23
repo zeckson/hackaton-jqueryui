@@ -29,6 +29,7 @@ define(["jquery", "jqueryui"],
                     .disableSelection();
 
                 this.anchor = $(this.options.anchor);
+                this.shown = false;
             },
             _init: function(){
                 if(this.options.autoBind){
@@ -66,6 +67,9 @@ define(["jquery", "jqueryui"],
             },
 
             _setVisible: function (visible) {
+                if(this.shown===visible) { return; }
+
+                this.shown = visible;
                 var position = $.extend({
                     of: this.anchor
                 }, this.options.position);
