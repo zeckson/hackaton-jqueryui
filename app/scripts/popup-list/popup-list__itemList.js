@@ -37,7 +37,7 @@ define(["popup-list/popup-list__item", "jquery"],
         ItemList.prototype.narrow = function (value) {
             jQuery.each(this.data, function (key, val) {
                 if (value) {
-                    if (key.indexOf(value) !== -1) {
+                    if (key.indexOf(value) < 0) {
                         val.getElement().hide();
                     }
                 }else {

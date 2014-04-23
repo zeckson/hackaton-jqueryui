@@ -8,15 +8,20 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
             // the constructor
             _create: function () {
                 var me = this;
-                this.itemList = $("<span>").
-                    popuplist({anchor: this.element,
-                        content: ["first", "second", "third"],
-                        hide: function () {
-                            me.narrow(null);
-                        }
-                    }).
-                    popuplist("getList");
+                this.popupList = $("<span>").
+                    hide();
+                this.popupList.popuplist({
+                    anchor: this.element,
+                    content: ["first", "second", "third"],
+                    hide: function () {
+                        me.narrow(null);
+                    }
+                });
                 this._bindEvents();
+            },
+
+            _init: function () {
+                $("body").append(this.popupList);
             },
 
             _bindEvents: function () {
@@ -43,11 +48,15 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
             },
 
             _addNewItem: function (item) {
-                this.itemList.add(item);
+                this.popupList.popuplist("getList").add(item);
             },
 
             narrow: function (value) {
-                this.itemList.narrow(value);
+                this.popupList.popuplist("getList").narrow(value);
+            },
+
+            _destroy: function () {
+                this.popupList.popuplist("destroy");
             }
 
         });
