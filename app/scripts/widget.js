@@ -1,4 +1,4 @@
-define('widget', ["jquery", "jqueryui"],
+define(["jquery", "jqueryui"],
     function ($) {
         var availableTags = [
             "ActionScript",
@@ -25,10 +25,15 @@ define('widget', ["jquery", "jqueryui"],
             "Scheme"
         ];
 
-        this.createWidget = function () {
+        var Widget = function(){
+
+        };
+
+        Widget.prototype.show = function () {
             $("#widget").autocomplete({
                 source: availableTags
             });
-        }
+        };
 
+        return new Widget();
     });

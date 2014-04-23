@@ -8,5 +8,5 @@ require.config({
 
 require(['widget'], function (widget) {
     'use strict';
-    new widget().createWidget();
+    widget.show();
 });
