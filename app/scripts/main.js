@@ -6,7 +6,10 @@ require.config({
     }
 });
 
-require(['widget'], function (widget) {
+require(['jquery', 'popup/popup'], function ($, popup) {
     'use strict';
-    widget.show();
+
+    $(function(){
+        $("#content").popup({anchor: '#anchor'}).popup("show");
+    });
 });
