@@ -1,6 +1,9 @@
 define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-list"],
     function ($, Watcher) {
         var DEFAULT_OPTIONS = {};
+
+        var SUBMIT_EVENT = "submit";
+        var NEW_OPTION_EVENT = "newoption";
         $.widget("ring.combobox", {
             // default options
             options: DEFAULT_OPTIONS,

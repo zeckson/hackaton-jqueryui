@@ -1,7 +1,8 @@
 define(["jquery", "popup-list/popup-list__itemList", "popup/popup"],
     function ($, ItemList) {
         var DEFAULT_OPTIONS = {
-            content: ['one', 'two', 'three']
+            content: ['one', 'two', 'three'],
+            emptyText: "<no matches>"
         };
 
         $.widget("ring.popuplist", $.ring.popup, {
@@ -11,7 +12,7 @@ define(["jquery", "popup-list/popup-list__itemList", "popup/popup"],
             // the constructor
             _create: function () {
                 this._super();
-                this.itemList = new ItemList();
+                this.itemList = new ItemList(this.options.emptyText);
                 this.element.empty();
             },
 
