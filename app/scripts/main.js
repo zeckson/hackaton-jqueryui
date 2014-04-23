@@ -10,6 +10,6 @@ require(['jquery', 'popup/popup'], function ($, popup) {
     'use strict';
 
     $(function(){
-        $("#content").popup({anchor: '#anchor'}).popup("show");
+        $("#content").popup({anchor: '#anchor'});
     });
 });

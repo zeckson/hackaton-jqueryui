@@ -1,20 +1,19 @@
-define(["jquery", "jqueryui"],
+define(["jquery", "popup"],
     function ($) {
         var POPUP_ROOT_CLASS = "popup";
         var DEFAULT_OPTIONS = {
             anchor: "a:first",
             position: {
                 my: "left top",
-                at: "left bottom"
-            },
-            autoBind: true
+                at: "right top"
+            }
         };
 
         var EVENT_SHOW = "show";
         var EVENT_HIDE = "hide";
 
 
-        $.widget("ring.popup", {
+        $.widget("ring.popup-list", $.ring.popup, {
             // default options
             options: DEFAULT_OPTIONS,
 
@@ -30,24 +29,6 @@ define(["jquery", "jqueryui"],
 
                 this.anchor = $(this.options.anchor);
             },
-            _init: function(){
-                if(this.options.autoBind){
-                    this._bindAnchor();
-                }
-            },
-
-            _bindAnchor: function() {
-                var it = this;
-                this.anchor.on({
-                    'mouseover': function(e) {
-                        it.show();
-                    },
-                    'mouseout': function(e){
-                        it.hide();
-                    }
-                });
-            },
-
             /**
              *
              * @param {*=} el
@@ -88,17 +69,7 @@ define(["jquery", "jqueryui"],
                 this.element
                     .removeClass(POPUP_ROOT_CLASS)
                     .enableSelection();
-            },
-
-            // _setOption is called for each individual option that is changing
-            _setOption: function( key, value ) {
-                // prevent invalid color values
-                if ( /anchor/.test(key) ) {
-                    this.anchor = $(value);
-                }
-                this._super( key, value );
             }
-
 
         });
     }
