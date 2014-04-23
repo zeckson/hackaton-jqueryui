@@ -1,0 +1,18 @@
+{
+  "name": "combobox",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "~3.6.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.1",
+    "bower": "^1.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
