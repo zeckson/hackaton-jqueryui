@@ -27,24 +27,26 @@ define(["jquery", "jqueryui", "popup-list/popup-list"],
             _bindEvents: function () {
                 var it = this;
                 this.element.on({
-                    'keydown': function (e) {
-                        it._keydown(e);
+                    'keyup': function (e) {
+                        it._keyup(e);
+                    },
+                    'input': function () {
+                        it.narrow(this.value);
                     }
                 });
             },
 
-            _keydown: function (event) {
+            _keyup: function (event) {
                 var value = this.element.val();
                 switch (event.keyCode) {
                     case $.ui.keyCode.ENTER:
                         if (value) {
                             this._addNewItem(value);
                         }
+                        event.preventDefault();
                         break;
                     default:
-                        this.narrow(value);
                 }
-
             },
 
             _addNewItem: function (item) {
