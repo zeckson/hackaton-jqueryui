@@ -19,7 +19,8 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
                     content: ["first", "second", "third"],
                     hide: function () {
                         me.narrow(null);
-                    }
+                    },
+                    autoBind: false
                 });
                 this._bindEvents();
             },
@@ -30,15 +31,35 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
 
             _bindEvents: function () {
                 var it = this;
-                this.element.on({
-                    'keyup': function (e) {
-                        it._keyup(e);
+                this._on(this.element, {
+                    'keyup': this._keyup,
+                    'valuechange': function (evt, value) {
+                        this.narrow(value);
                     },
-                    'valuechange': function (e,val) {
-                        it.narrow(val);
-                    }
+                    'click': this.toggle
                 });
+
+                this._on(this.document, {
+                    'click': function (event) {
+                        if (!$(event.target).is(this.element)) {
+                            this._setVisible(false);
+                        }
+                    }
+                })
             },
+
+            toggle: function (event) {
+                this._setVisible(!this.shown);
+            },
+
+            _setVisible: function (visible) {
+                if (this.visible === visible) {
+                    return;
+                }
+                this.visible = visible;
+                this.popupList.popuplist(this.visible ? "show" : "hide");
+            },
+
 
             _keyup: function (event) {
                 var value = this.element.val();
@@ -64,7 +85,6 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             _destroy: function () {
                 this.popupList.popuplist("destroy");
                 this.watcher.destroy();
-                this.element.off('keyup valuechange')
             }
 
         });

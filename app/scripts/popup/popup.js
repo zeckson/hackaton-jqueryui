@@ -98,6 +98,7 @@ define(["jquery", "jqueryui"],
             // events bound via _on are removed automatically
             // revert other modifications here
             _destroy: function () {
+                this._unbind();
                 // remove generated elements
                 this.element
                     .removeClass(POPUP_ROOT_CLASS)
