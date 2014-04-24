@@ -75,7 +75,9 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
             },
 
             _addNewItem: function (item) {
-                this.popupList.popuplist('list').add(item);
+                if(this.element.trigger(NEW_OPTION_EVENT, item) !== false) {
+                    this.popupList.popuplist('list').add(item);
+                }
             },
 
             narrow: function (value) {
@@ -83,6 +85,7 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
             },
 
             _destroy: function () {
+                this._super();
                 this.popupList.popuplist('destroy');
                 this.watcher.destroy();
             }
