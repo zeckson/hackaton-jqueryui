@@ -22,10 +22,17 @@
         }
 
         .svastica-container {
+            display: table;
             width: 300px;
             height: 300px;
-            align-content: center;
         }
+
+        .svastica-container > div {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -34,7 +41,7 @@
     <a id="popup" href="javascript:void(0)">Over me!</a>
 
     <div id="popup-content" class="svastica-container">
-        <div class="svastica"></div>
+        <div><div class="svastica"></div></div>
     </div>
 </div>
 
