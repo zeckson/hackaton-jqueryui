@@ -31,22 +31,30 @@ define(["jquery", "jqueryui"],
                 this.anchor = $(this.options.anchor);
                 this.shown = false;
             },
-            _init: function(){
-                if(this.options.autoBind){
-                    this._bindAnchor();
-                }
+            _init: function () {
+                this._bind();
             },
 
-            _bindAnchor: function() {
-                var it = this;
-                this.anchor.on({
-                    'mouseover': function(e) {
-                        it.show();
-                    },
-                    'mouseout': function(e){
-                        it.hide();
-                    }
-                });
+            _bind: function () {
+                if (this.options.autoBind) {
+                    var it = this;
+
+                    this.anchor.on({
+                        'mouseover.ring.popup': function () {
+                            it.show();
+                        },
+                        'mouseout.ring.popup': function () {
+                            it.hide();
+                        }
+                    });
+                }
+
+            },
+
+            _unbind: function () {
+                if (this.options.autoBind) {
+                    this.anchor.off('mouseover.ring.popup mouseout.ring.popup');
+                }
             },
 
             /**
@@ -54,10 +62,10 @@ define(["jquery", "jqueryui"],
              * @param {*=} el
              */
             show: function (el) {
-                if(el) {
+                if (el) {
                     this.anchor = $(el);
                 }
-                if(this.anchor.first()) {
+                if (this.anchor.first()) {
                     this._setVisible(true);
                 }
             },
@@ -67,7 +75,9 @@ define(["jquery", "jqueryui"],
             },
 
             _setVisible: function (visible) {
-                if(this.shown===visible) { return; }
+                if (this.shown === visible) {
+                    return;
+                }
 
                 this.shown = visible;
                 var position = $.extend({
@@ -95,12 +105,14 @@ define(["jquery", "jqueryui"],
             },
 
             // _setOption is called for each individual option that is changing
-            _setOption: function( key, value ) {
+            _setOption: function (key, value) {
                 // prevent invalid color values
-                if ( /anchor/.test(key) ) {
+                if (/anchor/.test(key)) {
+                    this._unbind();
                     this.anchor = $(value);
+                    this._bind();
                 }
-                this._super( key, value );
+                this._super(key, value);
             }
 
 
