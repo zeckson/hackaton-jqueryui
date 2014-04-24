@@ -7,14 +7,34 @@
     <link rel="stylesheet" href="scripts/popup/popup.css">
     <link rel="stylesheet" href="scripts/popup-list/popup-list.css">
     <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+    <style>
+        @-webkit-keyframes rotating {
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .svastica {
+            background-image: url("http://www.mitiemisteri.it/images/esoterismo/Svastica.jpg");
+            -webkit-animation: rotating 2s linear infinite;
+            width: 200px;
+            height: 200px;
+        }
+
+        .svastica-container {
+            width: 300px;
+            height: 300px;
+            align-content: center;
+        }
+    </style>
 </head>
 <body>
 
 <div>Example of popup:
     <a id="popup" href="javascript:void(0)">Over me!</a>
 
-    <div id="popup-content">
-        Hello popup!
+    <div id="popup-content" class="svastica-container">
+        <div class="svastica"></div>
     </div>
 </div>
 
@@ -26,7 +46,6 @@
 
 <div>Example of combobox:
     <input id="combobox" value="" placeholder="Enter text"/>
-</div>
 </div>
 </body>
 </html>
