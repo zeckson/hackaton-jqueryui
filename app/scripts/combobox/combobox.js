@@ -1,6 +1,8 @@
 define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-list'],
     function ($, Watcher) {
-        var DEFAULT_OPTIONS = {};
+        var DEFAULT_OPTIONS = {
+            addNewOption: true
+        };
 
         var SUBMIT_EVENT = 'submit';
         var NEW_OPTION_EVENT = 'newoption';
@@ -65,7 +67,7 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
                 switch (event.keyCode) {
                     case $.ui.keyCode.ENTER:
                         var item = this._list().getSelected();
-                        if(item) {
+                        if (item) {
                             this._submit(item);
                         }
                         if (value) {
@@ -83,15 +85,17 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
                 }
             },
 
-            _submit: function(item) {
-                if(this.element.trigger(SUBMIT_EVENT, item) !== false) {
+            _submit: function (item) {
+                if (this.element.trigger(SUBMIT_EVENT, item) !== false) {
                     this.element.val(item);
                 }
             },
 
             _addNewItem: function (item) {
-                if(this.element.trigger(NEW_OPTION_EVENT, item) !== false) {
-                    this._list().add(item);
+                if (this.element.trigger(NEW_OPTION_EVENT, item) !== false) {
+                    if (this.options.addNewOption) {
+                        this._list().add(item);
+                    }
                 }
             },
 
@@ -99,7 +103,7 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
                 this._list().narrow(value);
             },
 
-            _list: function() {
+            _list: function () {
                 return this.popupList.popuplist('list');
             },
 
