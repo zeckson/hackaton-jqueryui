@@ -21,12 +21,10 @@ define(["jquery", "jqueryui"],
             // the constructor
             _create: function () {
 
-                this.element
-                    .hide()
-                    // add a class for theming
-                    .addClass(POPUP_ROOT_CLASS)
-                    // prevent double click to select text
-                    .disableSelection();
+                this.element.
+                    hide().
+                    addClass(POPUP_ROOT_CLASS).
+                    disableSelection();
 
                 this.anchor = $(this.options.anchor);
                 this.shown = false;
@@ -37,15 +35,11 @@ define(["jquery", "jqueryui"],
 
             _bind: function () {
                 if (this.options.autoBind) {
-                    var it = this;
-
-                    this.anchor.on({
-                        'mouseover.ring.popup': function () {
-                            it.show();
+                    this._on(this.anchor, {
+                        'mouseover': function () {
+                            this.show();
                         },
-                        'mouseout.ring.popup': function () {
-                            it.hide();
-                        }
+                        'mouseout': this.hide
                     });
                 }
 
@@ -53,7 +47,7 @@ define(["jquery", "jqueryui"],
 
             _unbind: function () {
                 if (this.options.autoBind) {
-                    this.anchor.off('mouseover.ring.popup mouseout.ring.popup');
+                    this._off(this.anchor, 'mouseover mouseout');
                 }
             },
 
