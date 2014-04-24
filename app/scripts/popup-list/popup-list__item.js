@@ -1,5 +1,6 @@
 define(['jquery'], function ($) {
-    Item = function (value) {
+    Item = function (value, idx) {
+        this.index = idx;
         this.hidden = false;
         this.value = value;
         this.element = $('<li>').text(value);
@@ -16,6 +17,14 @@ define(['jquery'], function ($) {
     Item.prototype.hide = function () {
         this.element.hide();
         this.hidden = true;
+    };
+
+    Item.prototype.select = function () {
+        this.element.addClass('selected');
+    };
+
+    Item.prototype.deselect = function () {
+        this.element.removeClass('selected');
     };
 
     Item.prototype.show = function () {

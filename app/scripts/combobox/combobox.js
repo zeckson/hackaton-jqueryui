@@ -30,7 +30,6 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
             },
 
             _bindEvents: function () {
-                var it = this;
                 this._on(this.element, {
                     'keydown': this._keydown,
                     'valuechange': function (evt, value) {
@@ -65,23 +64,43 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
                 var value = this.element.val();
                 switch (event.keyCode) {
                     case $.ui.keyCode.ENTER:
+                        var item = this._list().getSelected();
+                        if(item) {
+                            this._submit(item);
+                        }
                         if (value) {
                             this._addNewItem(value);
                         }
                         event.preventDefault();
                         break;
+                    case $.ui.keyCode.DOWN:
+                        this._list().next();
+                        break;
+                    case $.ui.keyCode.UP:
+                        this._list().prev();
+                        break;
                     default:
+                }
+            },
+
+            _submit: function(item) {
+                if(this.element.trigger(SUBMIT_EVENT, item) !== false) {
+                    this.element.val(item);
                 }
             },
 
             _addNewItem: function (item) {
                 if(this.element.trigger(NEW_OPTION_EVENT, item) !== false) {
-                    this.popupList.popuplist('list').add(item);
+                    this._list().add(item);
                 }
             },
 
             narrow: function (value) {
-                this.popupList.popuplist('list').narrow(value);
+                this._list().narrow(value);
+            },
+
+            _list: function() {
+                return this.popupList.popuplist('list');
             },
 
             _destroy: function () {
