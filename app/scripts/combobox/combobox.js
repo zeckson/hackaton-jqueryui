@@ -32,7 +32,7 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             _bindEvents: function () {
                 var it = this;
                 this._on(this.element, {
-                    'keyup': this._keyup,
+                    'keydown': this._keydown,
                     'valuechange': function (evt, value) {
                         this.narrow(value);
                     },
@@ -61,7 +61,7 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             },
 
 
-            _keyup: function (event) {
+            _keydown: function (event) {
                 var value = this.element.val();
                 switch (event.keyCode) {
                     case $.ui.keyCode.ENTER:
