@@ -33,7 +33,7 @@ define(["jquery", "popup-list/popup-list__itemList", "popup/popup"],
                 this.itemList.remove(item);
             },
 
-            getList: function () {
+            list: function () {
                 return this.itemList;
             },
 

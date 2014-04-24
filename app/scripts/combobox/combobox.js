@@ -54,11 +54,11 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             },
 
             _addNewItem: function (item) {
-                this.popupList.popuplist("getList").add(item);
+                this.popupList.popuplist("list").add(item);
             },
 
             narrow: function (value) {
-                this.popupList.popuplist("getList").narrow(value);
+                this.popupList.popuplist("list").narrow(value);
             },
 
             _destroy: function () {
