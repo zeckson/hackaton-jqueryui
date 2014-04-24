@@ -1,20 +1,20 @@
-define(["jquery", "jqueryui"],
+define(['jquery', 'jquery.ui.widget'],
     function ($) {
-        var POPUP_ROOT_CLASS = "popup";
+        var POPUP_ROOT_CLASS = 'popup';
         var DEFAULT_OPTIONS = {
-            anchor: "a:first",
+            anchor: 'a:first',
             position: {
-                my: "left top",
-                at: "left bottom"
+                my: 'left top',
+                at: 'left bottom'
             },
             autoBind: true
         };
 
-        var EVENT_SHOW = "show";
-        var EVENT_HIDE = "hide";
+        var EVENT_SHOW = 'show';
+        var EVENT_HIDE = 'hide';
 
 
-        $.widget("ring.popup", {
+        $.widget('ring.popup', {
             // default options
             options: DEFAULT_OPTIONS,
 

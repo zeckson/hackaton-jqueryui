@@ -1,10 +1,10 @@
-define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-list"],
+define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-list'],
     function ($, Watcher) {
         var DEFAULT_OPTIONS = {};
 
-        var SUBMIT_EVENT = "submit";
-        var NEW_OPTION_EVENT = "newoption";
-        $.widget("ring.combobox", {
+        var SUBMIT_EVENT = 'submit';
+        var NEW_OPTION_EVENT = 'newoption';
+        $.widget('ring.combobox', {
             // default options
             options: DEFAULT_OPTIONS,
 
@@ -12,11 +12,11 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             _create: function () {
                 var me = this;
                 this.watcher = new Watcher(this.element);
-                this.popupList = $("<span>").
+                this.popupList = $('<span>').
                     hide();
                 this.popupList.popuplist({
                     anchor: this.element,
-                    content: ["first", "second", "third"],
+                    content: ['first', 'second', 'third'],
                     hide: function () {
                         me.narrow(null);
                     },
@@ -26,7 +26,7 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             },
 
             _init: function () {
-                $("body").append(this.popupList);
+                $('body').append(this.popupList);
             },
 
             _bindEvents: function () {
@@ -57,7 +57,7 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
                     return;
                 }
                 this.visible = visible;
-                this.popupList.popuplist(this.visible ? "show" : "hide");
+                this.popupList.popuplist(this.visible ? 'show' : 'hide');
             },
 
 
@@ -75,15 +75,15 @@ define(["jquery", "combobox/combobox__watcher", "jqueryui", "popup-list/popup-li
             },
 
             _addNewItem: function (item) {
-                this.popupList.popuplist("list").add(item);
+                this.popupList.popuplist('list').add(item);
             },
 
             narrow: function (value) {
-                this.popupList.popuplist("list").narrow(value);
+                this.popupList.popuplist('list').narrow(value);
             },
 
             _destroy: function () {
-                this.popupList.popuplist("destroy");
+                this.popupList.popuplist('destroy');
                 this.watcher.destroy();
             }
 

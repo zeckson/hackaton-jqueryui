@@ -1,11 +1,11 @@
-define(["popup-list/popup-list__item", "jquery"],
+define(['./popup-list__item', 'jquery'],
     function (Item, $) {
-        var POPUP_LIST_CLASS = "popup-list";
+        var POPUP_LIST_CLASS = 'popup-list';
         ItemList = function (emptyText) {
             this.size = 0;
             this.shown = 0;
             this.data = {};
-            this.element = $("<ul>").addClass(POPUP_LIST_CLASS);
+            this.element = $('<ul>').addClass(POPUP_LIST_CLASS);
             this.empty = emptyText ? new Item(emptyText) : null;
             if(this.empty) {
                 this.element.append(this.empty.getElement());

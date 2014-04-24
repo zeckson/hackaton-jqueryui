@@ -1,4 +1,4 @@
-define(["jquery"],
+define(['jquery'],
     function ($) {
         var InputWatcher = function(input) {
             this.input = $(input);

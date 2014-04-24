@@ -1,11 +1,11 @@
-define(["jquery", "popup-list/popup-list__itemList", "popup/popup"],
+define(['jquery', './popup-list__itemList', 'jquery.ui.widget', 'popup/popup'],
     function ($, ItemList) {
         var DEFAULT_OPTIONS = {
             content: ['one', 'two', 'three'],
-            emptyText: "<no matches>"
+            emptyText: '<no matches>'
         };
 
-        $.widget("ring.popuplist", $.ring.popup, {
+        $.widget('ring.popuplist', $.ring.popup, {
             // default options
             options: DEFAULT_OPTIONS,
 
