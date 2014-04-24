@@ -6,29 +6,38 @@ var gulp = require('gulp');
 var rjs = require('gulp-requirejs');
 var uglify = require('gulp-uglify');
 var htmlreplace = require('gulp-html-replace');
+var concat = require('gulp-concat');
 
 var paths = {
     main: 'app/scripts',
     html: 'app/index.html',
-    outCss: 'bundle.css',
-    outJsFileName: 'bundle.js'
+    outJsFile: 'bundle.js',
+    outCssFile: 'bundle.css'
 };
 
 gulp.task('scripts', function () {
     return rjs({name: 'main',
         baseUrl: paths.main,
         mainConfigFile: "app/scripts/main.js",
-        out: paths.outJsFileName}).
+        out: paths.outJsFile}).
         pipe(uglify()).
+        pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('css', function() {
+    return gulp.
+        src(['app/scripts/**/*.css']).
+        pipe(concat('bundle.css')).
         pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('html', function () {
     return gulp.src(paths.html).
         pipe(htmlreplace({
-            'js': paths.outJsFileName
+            'css': paths.outCssFile,
+            'js': paths.outJsFile
         })).
         pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('default', ['scripts', 'html']);
+gulp.task('default', ['scripts', 'css', 'html']);
