@@ -107,6 +107,7 @@ define(['./popup-list__item', 'jquery'],
                     it.shown--;
                 }
             });
+            this.items = items;
             this.update_();
         };
 
