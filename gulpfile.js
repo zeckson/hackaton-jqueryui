@@ -19,12 +19,17 @@ gulp.task('scripts', function () {
     return rjs({name: 'main',
         baseUrl: paths.main,
         mainConfigFile: "app/scripts/main.js",
-        out: paths.outJsFile}).
+        paths: {
+            jquery: 'empty:'
+        },
+        out: paths.outJsFile
+    }).
         pipe(uglify()).
         pipe(gulp.dest('./dist/'));
-});
+})
+;
 
-gulp.task('css', function() {
+gulp.task('css', function () {
     return gulp.
         src(['app/scripts/**/*.css']).
         pipe(concat('bundle.css')).
