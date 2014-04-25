@@ -13,12 +13,18 @@ require.config({
     }
 });
 
-require(['jquery', 'popup/popup' ,'popup-list/popup-list', 'combobox/combobox'], function ($) {
+require(['jquery', 'popup/popup' , 'popup-list/popup-list', 'combobox/combobox'], function ($) {
     'use strict';
 
-    $(function(){
+    $(function () {
         $("#popup-content").popup({anchor: '#popup'});
         $("#popuplist-content").popuplist({anchor: '#popuplist'});
-        $("#combobox").combobox();
+        $("#combobox").combobox({
+            'submit': function (evt, item) {
+                $("#event").text('submitted: ' + item);
+            },
+            'newoption': function (evt, item) {
+                $("#event").text('new option: ' + item);
+            }});
     });
 });

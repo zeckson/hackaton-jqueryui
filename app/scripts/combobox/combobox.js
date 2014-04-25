@@ -86,13 +86,13 @@ define(['jquery', './combobox__watcher', 'jquery.ui.widget', 'popup-list/popup-l
             },
 
             _submit: function (item) {
-                if (this.element.trigger(SUBMIT_EVENT, item) !== false) {
+                if (this._trigger(SUBMIT_EVENT, null, item) !== false) {
                     this.element.val(item);
                 }
             },
 
             _addNewItem: function (item) {
-                if (this.element.trigger(NEW_OPTION_EVENT, item) !== false) {
+                if (this._trigger(NEW_OPTION_EVENT, null, item) !== false) {
                     if (this.options.addNewOption) {
                         this._list().add(item);
                     }
